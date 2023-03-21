@@ -1,1 +1,308 @@
-#start
+import glob
+import os
+import shutil
+
+import pyautogui
+
+# 读取同单号文件
+d0 = str(input('请输入订单号\n**********须 知************\n*****如果有需要抓取的电脑没开机或IP不对,'
+               '总体时间会延长还获取不了数据*****  \n例如:hds20230001\n'))
+
+lijuan = pyautogui.prompt('李娟电脑默认129 ，如果不是请输入新的后三位')
+if not lijuan:
+    lijuan = str(129)
+youyating = pyautogui.prompt('尤雅婷电脑默认149 ，如果不是请输入新的后三位')
+if not youyating:
+    youyating = str(149)
+liuxiaoxing = pyautogui.prompt('刘晓星电脑默认116 ，如果不是请输入新的后三位')
+if not liuxiaoxing:
+    liuxiaoxing = str(116)
+youhua = pyautogui.prompt('开料优化电脑默认146 ，116 ，如果不是请输入新的后三位')
+if not youhua:
+    youhua = str(146)
+youhua1 = str(116)
+# # 有新人直接 往下面加
+
+d1 = d0[:11]
+d2 = d0[7:11]
+d3 = d0[3:7]
+
+print('\n\n')
+# ##################################  报 表 清 单  #############################
+path0 = r'\\192.168.0.{}\hds报表\*\*{}*.xls'.format(lijuan, d0)
+path00 = r'\\192.168.0.{}\hds报表\*{}*.xls'.format(lijuan, d0)
+
+path1 = r'\\192.168.0.{}\hds报表\*\*{}*.xls'.format(youyating, d0)
+path01 = r'\\192.168.0.{}\hds报表\*{}*.xls'.format(youyating, d0)
+
+path2 = r'\\192.168.0.{}\hds报表\*\*{}*.xls'.format(liuxiaoxing, d0)
+path02 = r'\\192.168.0.{}\hds报表\*{}*.xls'.format(liuxiaoxing, d0)
+
+# # 有新人直接 往下面加
+
+# ##################################  N C 程 序  ##############################
+path11 = r'\\192.168.0.{}\cnc 孔位\*{}*'.format(lijuan, d0)
+path011 = r'\\192.168.0.{}\cnc 孔位\*{}*\*{}*'.format(lijuan, d3, d0)
+
+path12 = r'\\192.168.0.{}\cnc 孔位\*{}*'.format(youyating, d0)
+path012 = r'\\192.168.0.{}\cnc 孔位\*{}*\*{}*'.format(youyating, d3, d0)
+
+path13 = r'\\192.168.0.{}\cnc 孔位\*{}*'.format(liuxiaoxing, d0)
+path013 = r'\\192.168.0.{}\cnc 孔位\*{}*\*{}*'.format(liuxiaoxing, d3, d0)
+
+# # 有新人直接 往下面加
+
+# ##################################  优 化 数 据  ##############################
+path20 = r'\\192.168.0.{}\hds裁切清单\*{}*.CSV'.format(youhua, d1)
+path020 = r'\\192.168.0.{}\hds裁切清单\*\*{}*.CSV'.format(youhua, d1)
+
+path21 = r'\\192.168.0.{}\*料单\*{}*'.format(youhua, d0)
+path021 = r'\\192.168.0.{}\*料单\*\*{}*'.format(youhua, d0)
+
+path0020 = r'\\192.168.0.{}\hds裁切清单\*{}*.CSV'.format(youhua1, d1)
+path00020 = r'\\192.168.0.{}\hds裁切清单\*\*{}*.CSV'.format(youhua1, d1)
+
+path0021 = r'\\192.168.0.{}\*料单\*{}*'.format(youhua1, d0)
+path00021 = r'\\192.168.0.{}\*料单\*\*{}*'.format(youhua1, d0)
+
+# ##################################  图 纸  ##############################
+
+path22 = r'\\192.168.0.130\下单图纸\1订单图纸\*{}*\{}*'.format(d3, d2)
+path022 = r'\\192.168.0.130\下单图纸\1订单图纸\{}*'.format(d2)
+# ##################################  拆 单  图 纸  ##############################
+path30 = r'\\192.168.0.{}\Imorder\*\*{}*\*{}*.dwg'.format(lijuan, d0, d0)
+path030 = r'\\192.168.0.{}\Imorder\*{}*\*{}*.dwg'.format(lijuan, d0, d0)
+
+path31 = r'\\192.168.0.{}\Imorder\*{}*\*{}*.dwg'.format(youyating, d0, d0)
+path031 = r'\\192.168.0.{}\Imorder\*\*{}*\*{}*.dwg'.format(youyating, d0, d0)
+
+path32 = r'\\192.168.0.{}\Imorder\*{}*\*{}*.dwg'.format(liuxiaoxing, d0, d0)
+path032 = r'\\192.168.0.{}\Imorder\*\*{}*\*{}*.dwg'.format(liuxiaoxing, d0, d0)
+
+# # 有新人直接 往下面加
+
+# ##################################  创 建 文 件 夹  ##############################
+path = os.getcwd() + '\\A.{}'.format(d0)
+if os.path.exists(path):
+    print('创建指定文件夹存在')
+else:
+    print('指定文件夹不存在,可以创建文件夹')
+    os.getcwd()
+    path = os.getcwd() + '\\A.{}'.format(d0)
+    os.mkdir(path)
+
+print('\n\n搜索范围较大,预估时间10秒')
+
+b1 = glob.glob(path0)  # 各种清单.五金.板件.柜体.异型等等
+b2 = glob.glob(path00)
+b3 = glob.glob(path1)
+b4 = glob.glob(path01)
+b5 = glob.glob(path2)
+b6 = glob.glob(path02)
+
+# # 有新人直接 往下面加
+
+b7 = glob.glob(path20)  # 优化的数据
+b8 = glob.glob(path020)
+b9 = glob.glob(path21)
+b10 = glob.glob(path021)
+b11 = glob.glob(path22)
+b12 = glob.glob(path022)
+
+b07 = glob.glob(path0020)  # 优化的数据
+b08 = glob.glob(path00020)
+b09 = glob.glob(path0021)
+b010 = glob.glob(path00021)
+
+# # 有新人直接 往下面加
+
+b13 = glob.glob(path30)  # 拆单图纸 dwg
+b14 = glob.glob(path030)
+b15 = glob.glob(path31)
+b16 = glob.glob(path031)
+b17 = glob.glob(path32)
+b18 = glob.glob(path032)
+
+# # 有新人直接 往下面加
+
+# ##################################  文 件 清 单 合 集  ##############################
+b0 = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b07 + b8 + b08 + b9 + b09 + b10 + b010 + b13 + b14 + b15 + b16 + b17 + b18  # # 有新人直接 往下面加
+print(b0)
+
+# #################################  NC 程 序 + 设计图纸 合 集  ##############################
+b50 = glob.glob(path11)  # 孔位
+b51 = glob.glob(path011)
+b52 = glob.glob(path12)
+b53 = glob.glob(path012)
+b54 = glob.glob(path13)
+b55 = glob.glob(path013)
+
+# # 有新人直接 往下面加
+# #b11 b12 是图纸,整个文件复制
+b00 = b11 + b12
+print(b00)
+b01 = b50 + b51 + b52 + b53 + b54 + b55
+print(b01)
+b02 = b52 + b53 + b54 + b55
+print(b02)
+b03 = b54 + b55
+print(b03)
+
+# 目标文件夹
+label_path = '\n'  # 'E:\文档\3'
+
+# 复制到哪个文件夹
+copy_path = path
+
+
+def copy_files(path1, path2):
+    label_files = b0  # os.listdir(path1)
+
+    for label_file in label_files:
+        (name, extension) = os.path.splitext(label_file)
+        print(os.path.splitext(label_file))
+        # 遍历.xls的后缀文件
+        if extension == '.xls':
+            textfile_path = os.path.join(path1, label_file)
+            print(os.path.join(path1, label_file))
+            shutil.copy(textfile_path, path2)
+            print(textfile_path)
+
+
+copy_files(label_path, path)
+
+pass
+
+
+def copy_files1(path1, path2):
+    label_files = b0  # os.listdir(path1)
+
+    for label_file in label_files:
+        (name, extension) = os.path.splitext(label_file)
+        print(os.path.splitext(label_file))
+        # 遍历.csv的后缀文件
+        if extension == '.CSV':
+            textfile_path = os.path.join(path1, label_file)
+            print(path1)
+            print(os.path.join(path1, label_file))
+            shutil.copy(textfile_path, path2)
+            print(textfile_path)
+
+
+copy_files1(label_path, path)
+
+pass
+
+
+def copy_files1(path1, path2):
+    label_files = b0  # os.listdir(path1)
+
+    for label_file in label_files:
+        (name, extension) = os.path.splitext(label_file)
+        print(os.path.splitext(label_file))
+        # 遍历.csv的后缀文件
+        if extension == '.csv':
+            textfile_path = os.path.join(path1, label_file)
+            print(path1)
+            print(os.path.join(path1, label_file))
+            shutil.copy(textfile_path, path2)
+            print(textfile_path)
+
+
+copy_files1(label_path, path)
+
+pass
+
+
+def copy_files1(path1, path2):
+    label_files = b0  # os.listdir(path1)
+
+    for label_file in label_files:
+        (name, extension) = os.path.splitext(label_file)
+        print(os.path.splitext(label_file))
+        # 遍历.xps的后缀文件
+        if extension == '.xps':
+            textfile_path = os.path.join(path1, label_file)
+            print(path1)
+            print(os.path.join(path1, label_file))
+            shutil.copy(textfile_path, path2)
+            print(textfile_path)
+
+
+copy_files1(label_path, path)
+
+pass
+
+
+def copy_files1(path1, path2):
+    label_files = b0  # os.listdir(path1)
+
+    for label_file in label_files:
+        (name, extension) = os.path.splitext(label_file)
+        print(os.path.splitext(label_file))
+        # 遍历.dwg的后缀文件
+        if extension == '.DWG':
+            textfile_path = os.path.join(path1, label_file)
+            print(path1)
+            print(os.path.join(path1, label_file))
+            shutil.copy(textfile_path, path2)
+            print(textfile_path)
+
+
+copy_files1(label_path, path)
+
+# ############################  复制  图 纸   #############################
+
+for i in b00:
+    child = os.path.join(r'{}'.format(i))
+    (name, extension) = os.path.splitext(i)  # 清理后缀.mpr的路径,只留文件夹 #
+    print(child)
+    j = os.path.basename(child)  # 只还回文件名 #
+    print(j)
+    if not os.path.exists(os.path.join(path + '\\{}'.format(j))):
+        shutil.copytree(child, os.path.join(path + '\\{}'.format(j)))
+    else:
+        print(os.path.join(path + '\\{}'.format(j)) + '此路径有重名')
+
+# ############################  复制  mpr 程序   #############################
+
+# os.listdir(path) 原始程序
+for i in b01:
+    child = os.path.join(r'{}'.format(i))
+    (name, extension) = os.path.splitext(i)  # 清理后缀.mpr的路径,只留文件夹 #
+    if extension == '.mpr':
+        break
+    print(child)
+    j = os.path.basename(child)  # 只还回文件名 #
+    print(j)
+    if not os.path.exists(os.path.join(path + '\\{}'.format(j))):
+        shutil.copytree(child, os.path.join(path + '\\{}'.format(j)))
+    else:
+        print(os.path.join(path + '\\{}'.format(j)) + '此路径有重名')
+
+for i in b02:
+    child = os.path.join(r'{}'.format(i))
+    (name, extension) = os.path.splitext(i)  # 清理后缀.mpr的路径,只留文件夹 #
+    if extension == '.mpr':
+        break
+    print(child)
+    j = os.path.basename(child)  # 只还回文件名 #
+    print(j)
+    if not os.path.exists(os.path.join(path + '\\{}'.format(j))):
+        shutil.copytree(child, os.path.join(path + '\\{}'.format(j)))
+    else:
+        print(os.path.join(path + '\\{}'.format(j)) + '此路径有重名')
+
+for i in b03:
+    child = os.path.join(r'{}'.format(i))
+    (name, extension) = os.path.splitext(i)  # 清理后缀.mpr的路径,只留文件夹 #
+    if extension == '.mpr':
+        break
+    print(child)
+    j = os.path.basename(child)  # 只还回文件名 #
+    print(j)
+    if not os.path.exists(os.path.join(path + '\\{}'.format(j))):
+        shutil.copytree(child, os.path.join(path + '\\{}'.format(j)))
+    else:
+        print(os.path.join(path + '\\{}'.format(j)) + '此路径有重名')
+
